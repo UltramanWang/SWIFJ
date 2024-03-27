@@ -1,7 +1,0 @@
-Parity: none
-baudRate: '115200'
-com: '0'
-dataBits: '8'
-flowControl: none
-name: 串口
-stopBits: '1'

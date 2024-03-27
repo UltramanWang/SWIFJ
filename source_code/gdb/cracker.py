@@ -1,7 +1,11 @@
 import subprocess
 import time
 import os
+from loguru import logger
 
+
+
+tmp_file='F:\sudu\SWIFJ\debug'
 def test_run_gdb():
     # 示例GDB命令列表
     gdb_commands = [
@@ -29,12 +33,32 @@ def test_run_gdb():
     output, _ = process.communicate()
     return output
 
+def open_gdb():
+    retries=0
+    with open(os.path.join(tmp_file,'tmp.txt'),'w') as f:
+        process = subprocess.Popen(['gdb',os.path.join('F:\sudu\SWIFJ\source_code\gdb','debug','hello.exe')], stdin=subprocess.PIPE, stdout=f, text=True)
+    while True:
+        time.sleep(0.1)
+        retries+=1
+        with open(os.path.join(tmp_file,'tmp.txt'),'r') as f:
+            lines=f.readlines()
+        logger.debug(lines[-1],retries)
+        if len(lines)>0 and '(gdb)' in lines[-1]:
+            return process
+        elif retries>10:
+            break
+    return False
+
 
  
 
 if __name__=='__main__':
-    # print(os.getcwd())
+    if not open_gdb():
+        exit(-1)
+    
+    # print(os.getcwd().rfind('SWIFJ'))
+    # print(os.path.abspath(__file__))
     # exit(0)
     # 运行GDB并获取输出
-    gdb_output = test_run_gdb()
-    print(gdb_output)
+    # gdb_output = test_run_gdb()
+    # print(gdb_output)

@@ -227,6 +227,9 @@ class Beautifier():
         return source.rstrip('\n')
 
 def run(command):
+    # print('123123')
+    # print(len(gdb.PYTHONDIR))
+    # print(gdb.parse_and_eval('$pc'))
     return gdb.execute(command, to_string=True)
 
 def ansi(string, style):
@@ -234,6 +237,7 @@ def ansi(string, style):
         return '\x1b[{}m{}\x1b[0m'.format(style, string)
     else:
         return string
+
 
 def divider(width, label='', primary=False, active=True):
     if primary:
@@ -2054,7 +2058,8 @@ class Registers(Dashboard.Module):
         out = [''] * rows
         for i, column in enumerate(matrix):
             max_name = max_names_column[i]
-            print(matrix[i])
+            #liuzhi
+            # print(matrix[i])
             max_value = max_values_column[i]
             for j, (name, value, changed) in enumerate(column):
                 name = '' * (max_name - len(name)) + ansi(name, R.style_low)
@@ -2064,7 +2069,6 @@ class Registers(Dashboard.Module):
                 padding = '' 
                 item = '{}{} {}'.format(padding, name, value)
                 out[j] += item+'\n'
-        # for re in gdb.Architecture.register_groups (1):
         return out
 
     def attributes(self):
