@@ -37,18 +37,17 @@ class SettingDialog(QDialog):
         self.m_ui = Ui_Dialog()
         self.m_ui.setupUi(self) 
         self.m_currentSettings = Settings() #m_currentSettings初始化
-
         self.m_currentSet = Settingtest() #m_currentSet初始化
 
         self.m_ui.applyButton.clicked.connect(self.apply)
+
+        # self.serial_port_file()
         self.fill_ports_parameters()
         self.full_port_info()
 
+
     def apply(self):
         self.update_settings()   #更新m_currentSettings值
-        # json_data = json.dumps(self.m_currentSettings)
-        # print("---------------",json_data)
-
         self.hide() 
 
     def setting(self):
@@ -59,6 +58,8 @@ class SettingDialog(QDialog):
         self.m_ui.serialPortInfoListBox.clear()
         for info in QSerialPortInfo.availablePorts():
             self.m_ui.serialPortInfoListBox.addItem(info.portName())
+
+    # def serial_port_file():
 
  
     def fill_ports_parameters(self):

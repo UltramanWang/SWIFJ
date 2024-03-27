@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QMessageBox,QPlainTextEdit
 from ui.ui_mainwindow import Ui_MainWindow
 from settingdialog import SettingDialog
 from fault_injection import SettingFault
+from connect import Connect
 from PyQt5.QtSerialPort import QSerialPort
 from PyQt5.QtCore import QIODevice,Qt
  
@@ -11,12 +12,15 @@ class MainWindow(QMainWindow):
  
         self.m_ui = Ui_MainWindow()
         self.m_ui.setupUi(self)
+
         self.m_serial = QSerialPort(self)
         self.m_settings = SettingDialog(self)
 
         self.m_settingfault = SettingFault(self)#创建一个SettingDialog实例
         self.m_ui.actionFault.triggered.connect(self.m_settingfault.show)
 
+        self.m_settingcon = Connect(self)#创建一个Connect实例
+        self.m_ui.actionCon.triggered.connect(self.m_settingcon.show)
 
         self.m_textEdit = QPlainTextEdit(self) 
         self.setCentralWidget(self.m_textEdit)   

@@ -32,6 +32,25 @@
    <addaction name="actionConfigure"/>
    <addaction name="actionQuit"/>
    <addaction name="actionFault"/>
+   <addaction name="actionCon"/>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>764</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>编辑</string>
+    </property>
+    <addaction name="actionCon"/>
+    <addaction name="actionFault"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <action name="actionConfigure">
    <property name="icon">
@@ -78,7 +97,11 @@
     <string>故障注入参数</string>
    </property>
   </action>
-  <action name="actionconnect">
+  <action name="actionCon">
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/control.png</normaloff>../images/control.png</iconset>
+   </property>
    <property name="text">
     <string>设备连接</string>
    </property>
